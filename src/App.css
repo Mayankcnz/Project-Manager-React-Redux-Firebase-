@@ -1,0 +1,9 @@
+body{
+background: graident_end;
+background-image: -webkit-radial-gradient(top, circle cover, gradient_start, graident_end 80%);
+background-image: -moz-radial-gradient(top, circle cover, gradient_start, graident_end 80%);
+background-image: -o-radial-gradient(top, circle cover, gradient_start, graident_end 80%);
+background-image: radial-gradient(top, circle cover, gradient_start, graident_end 80%);
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}

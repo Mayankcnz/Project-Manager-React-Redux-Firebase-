@@ -1,0 +1,26 @@
+::-webkit-scrollbar {
+    display: none;
+    }
+
+    #nestedContainer1{
+        height:350px;
+        overflow-y: scroll;
+    }
+
+    @media screen and (max-width: 767px) {   
+        
+    }
+    
+    @media screen and (min-width: 768px) {      
+        
+        
+    } 
+    @media (min-width: 992px) {      
+          
+    }
+    @media (min-width: 1200px) {    
+        
+        #nestedContainer1{
+            height:800px;
+        }
+    }

@@ -1,0 +1,55 @@
+.createProjectForm{
+background: -webkit-linear-gradient(bottom, rgb(233, 233, 233), rgb(226, 226, 226) 175px);
+  background: -moz-linear-gradient(bottom, rgb(205, 206, 207), rgb(188, 190, 192) 175px);
+  background: linear-gradient(bottom, rgb(206, 206, 206)rgb(176, 177, 179)75px);
+  border-radius:10px;
+  margin: auto;
+  position: relative;
+  overflow: visible;
+  font-family:  Geneva, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  border: 5px solid #999;
+  border: inset 4px solid #333;
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3)
+}
+
+.errorMessage{
+  color: #F45252;
+}
+
+/**table{
+  border: 1px solid black;
+  table-layout: fixed;
+  width: 200px;
+}**/
+
+th, td {
+  border: 1px solid black;
+  width: 100px;
+}
+
+td:focus { 
+  background-color: rgb(212, 178, 178);
+}
+
+input{
+  resize: both;
+  overflow: auto;
+}
+
+input[type="text"], textarea, select { 
+  outline: none;
+  background-color: rgb(245, 187, 187);
+  border: none;
+  width: 100%;
+ 
+}
+  
+  
