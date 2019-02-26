@@ -56,7 +56,7 @@ const ProjectDetails = (props) =>{
     <div className="nestedContainer3 list-item"><div className="list-content"><TabBar id={props.id} project={project}/></div></div>
     {/*<div className="col-sm-12 col-md-4 nestedContainer4 list-item" style={{backgroundColor:"lightgrey", marginTop:"40px"}}><div className="list-content">.col-xs-6 .col-md-2</div></div>*/}
   </div>
-  <AddComent comments={userComments} id={props.id} />
+  <AddComent comments={userComments} id={props.id} auth={auth} />
    
 </div>
 

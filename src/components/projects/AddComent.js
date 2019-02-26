@@ -27,25 +27,14 @@ class AddComment extends Component {
 
         if(this.state.comment.length == 0)return;
 
-        const comment = {
-            comment: this.state.comment,
-            Username: this.props.profile.firstName +" "+this.props.profile.lastName,
-            projectId: this.props.id
-        }
-
-        this.props.createComment(comment);
+        this.props.createComment(this.state.comment, this.props.id);
 
     }
-
-    handleReply = (reply, id) =>{
-
-    }
-
     render(){
 
         return(
 
-            <div className="container" >
+            <div className="container-fluid" >
             <div className="callout secondary">
         <h4 className="leave-comment">Add a Comment</h4>
         <form className="post-edit" ref="commentForm" onSubmit={this.handleSubmit}>
@@ -72,7 +61,7 @@ const mapStateToProps = (state) =>{
 // adds a comment to the comments collections among with the user name, and time
 const mapDispatchToProps = (dispatch) =>{
     return {// add proeprties to the props of this component
-        createComment: (comment) => dispatch(createComment(comment))
+        createComment: (comment, projectID) => dispatch(createComment(comment, projectID))
     }
 }
 

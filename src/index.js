@@ -15,12 +15,12 @@ import fbConfig from './config/fbConfig'
 // takes a root reducer. each root reducer takes actions 
 // will add further root reducers and combine it to one which also combines the actions it takes 
 const store = createStore(rootReducer,
-        compose(
-          applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-          reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true}),
-          reduxFirestore(fbConfig) // redux bindings for firestore
-        )
-      );
+  compose(
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    reactReduxFirebase(fbConfig, {userProfile: 'users', useFirestoreForProfile: true, attachAuthIsReady: true}),
+    reduxFirestore(fbConfig) // redux bindings for firestore
+  )
+);
 // apply thunk as the middleware, applymiddleware can aslso take a list of middleware
 // the purpose of applymiddelware is to enchance the functionality. that functionality now being is that
 // we can return a function inside our action creators which can then interact with the database

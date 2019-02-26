@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions'; 
 import {Redirect} from 'react-router-dom';
 import CustomFormGroup from './CustomFormGroup';
+import ExternalLogin from './ExternalLogin';
 
 
 class SignIn extends Component {
@@ -58,6 +59,11 @@ return (
   SignIn
   </Button>
   <div className="center">{authError ? <p>{authError}</p> : null}</div>
+
+  <div style={{textAlign:"center", marginTop: "2%"}}><h4>or</h4></div>
+
+<ExternalLogin />
+
 </form>
 </div>  
 );
@@ -65,6 +71,8 @@ return (
 }
 
 const mapStateToProps = (state) =>{
+
+  console.log(state, "omg");
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth

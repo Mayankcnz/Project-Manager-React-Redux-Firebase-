@@ -14,6 +14,8 @@ export const createProject = (project) =>{
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
+        console.log(profile,"working for this one");
+
         firestore.collection('projects').add({
             ...project,
             authorFirstName: profile.firstName,
@@ -37,17 +39,28 @@ export const createReply = (reply, id) =>{
 
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
-        const authorID = getState().firebase.auth.uid;
+        console.log(profile, "profile");
+        const auth = getState().firebase.auth;
 
-        const replyObject = {
-            reply: reply,
-            Username: profile.firstName+" "+profile.lastName,
-            replyID: id
+        let replyObject = null;
+
+        if(profile.isEmpty){ // profile is empty so User must be logged in via a social medium
+            replyObject = {
+                comment: reply, 
+                replyID: id,
+                Username: auth.displayName,
+                photoURL: auth.photoURL
+            }
+        }else {
+            replyObject = {
+                comment: reply, 
+                replyID: id,
+                Username: profile.firstName +" "+profile.lastName,
+                photoURL: "https://img.icons8.com/office/48/000000/administrator-male.png"
+            }
         }
         firestore.collection('replies').add({
-            reply: reply,
-            Username: profile.firstName+" "+profile.lastName,
-            replyID: id,
+            ...replyObject,
             createdAt: new Date()
      
    }).then(() =>{
@@ -83,14 +96,33 @@ export const updateProject = (project, id) =>{ // adding user in because iwe wan
 
 }
 
-export const createComment = (comment) =>{
+export const createComment = (comment, projectID) =>{
     return(dispatch, getState, {getFirestore}) =>{
 
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
-        const authorID = getState().firebase.auth.uid;
+        const auth = getState().firebase.auth;
+        
+        let commentObject = null;
+
+        if(profile.isEmpty){ // profile is empty so User must be logged in via a social medium
+            commentObject = {
+                comment: comment, 
+                projectId: projectID,
+                Username: auth.displayName,
+                photoURL: auth.photoURL
+            }
+        }else {
+            commentObject = {
+                comment: comment, 
+                projectId: projectID,
+                Username: profile.firstName +" "+profile.lastName,
+                photoURL: "https://img.icons8.com/office/48/000000/administrator-male.png"
+            }
+        }
         firestore.collection('comments').add({
-            ...comment,
+            
+            ...commentObject,
             createdAt: new Date()
         })
         .then(() =>{

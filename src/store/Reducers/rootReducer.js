@@ -10,11 +10,11 @@ import addressReducer from './addressReducer';
 const rootReducer = combineReducers({
     auth: authReducer, // authReducer will update information on the auth property inside the state object
     address: addressReducer,
+    firebase: firebaseReducer,
     firestore: firestoreReducer,
     project: projectReducer,
     sidebar: sidebarReducer,
     collapse: collapseReducer,
-    firebase: firebaseReducer
 });
 
 

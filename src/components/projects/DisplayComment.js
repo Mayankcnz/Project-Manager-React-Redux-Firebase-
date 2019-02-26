@@ -104,13 +104,18 @@ class DisplayComment extends Component {
 
 render(){
 
-	this.props.deleteReply();
+	const {auth} = this.props;
+	console.log(auth, "Auth");
+
 
 	//console.log(replies, "Replies");
 	//console.log(this.props.comment.id, "LOLZ");
-	const {replies} = this.props;
+	const {replies, comment} = this.props;
 	const filteredReplies = replies && replies.filter(reply => reply.replyID== this.props.comment.id);
 
+	let display = false;
+
+	//<i class="fas fa-user fa-4x"></i>
     return(
        <div class="comments-container">
 
@@ -118,11 +123,11 @@ render(){
 			<li>
 				<div class="comment-main-level">
 			
-					<div class="comment-avatar"><i class="fas fa-user fa-4x"></i></div>
+					<div class="comment-avatar"><img src={comment.photoURL} alt=""/></div>
 				
 					<div class="comment-box">
 						<div class="comment-head">
-							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{this.props.comment.Username}</a></h6>
+							<h6 class="comment-name by-author"><a href={auth.photoURL}>{comment.Username}</a></h6>
 							<span id="wordBreak">{moment(this.props.comment.createdAt.toDate()).fromNow()}</span>
               <i class="fas fa-times" onClick={this.handleDeleteComment}></i>
               <i class="far fa-edit" onClick={this.enterEditMode}></i>
@@ -130,7 +135,7 @@ render(){
 							<i class="fa fa-heart"></i>
 						</div>
 						<div class="comment-content">
-							{this.state.editMode ? this.renderCommentEdit() : this.props.comment.comment}
+							{this.state.editMode ? this.renderCommentEdit() : comment.comment}
 							{this.state.isReplying ? this.renderCommentReply() : null}
 						</div>
 					</div>
@@ -152,7 +157,8 @@ render(){
 const mapStateToProps = (state) =>{
 	const replies  = state.firestore.ordered.replies;
 	return {
-		replies: replies
+		replies: replies,
+		auth: state.firebase.auth
 	}
 
 	

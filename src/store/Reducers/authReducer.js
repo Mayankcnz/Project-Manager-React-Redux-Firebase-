@@ -5,32 +5,42 @@ const initState = {
 
 const authReducer = (state = initState, action) =>{
 
-    if(action.type === 'LOGIN_ERROR'){
-        return {
+    switch(action.type){
+        case 'LOGIN_ERROR':
+          console.log('login error');
+          return {
             ...state,
             authError: 'Login failed'
-        }
-    }else if(action.type=== 'LOGIN_SUCCESS'){
-        console.log('login success');
-        return {
+          }
+    
+        case 'LOGIN_SUCCESS':
+          console.log('login success');
+          return {
             ...state,
             authError: null
-        }
-    }else if(action.type === 'SIGNOUT_SUCCESS'){
-        console.log("signing out");
-    }else if(action.type === 'SIGN_UP_SUCCESS'){
-        console.log("signup success");
-        return {
+          }
+    
+        case 'SIGNOUT_SUCCESS':
+          console.log('signout success');
+          return state;
+    
+        case 'SIGNUP_SUCCESS':
+          console.log('signup success')
+          return {
             ...state,
             authError: null
-        }
-    }else if(action.type === 'SIGNUP_ERROR'){
-        return{
+          }
+    
+        case 'SIGNUP_ERROR':
+          console.log('signup error')
+          return {
             ...state,
-            authError: action.err.nessage
-        }
-    }
-    return state;
-};
+            authError: action.err.message
+          }
+    
+        default:
+          return state
+      }
+    };
 
 export default authReducer;
