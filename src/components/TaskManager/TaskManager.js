@@ -38,6 +38,10 @@ class TaskManager extends Component {
 			tasks
 		});
 	 }
+
+	 handleClick = (e) =>{
+		e.preventDefault();
+	 }
  
 
 
@@ -63,7 +67,40 @@ render(){
 
     return (
 
- 			<div className=" container-fluid container-drag">
+		<div className=" container-fluid container-drag">
+			 <div className="row list">
+					<h2 className="header">{"Testing"}</h2>
+					<div className="col-xs-6">
+                <div className="wip"
+                    onDragOver={(e)=>this.onDragOver(e)}
+                    onDrop={(e)=>{this.onDrop(e, "wip")}}>
+                    <span className="task-header">{this.props.taskListName}</span>
+					<div className="addTask" onClick={this.handleClick}>
+               			 <h6>+Add a Task</h6>
+           			 </div>
+                    {/*tasks.wip*/}
+                </div>
+				</div>
+				<div className="col-xs-6">
+				<div className="droppable"
+                    onDragOver={(e)=>this.onDragOver(e)}
+                    onDrop={(e)=>this.onDrop(e, "complete")}>
+                     <span className="task-header">COMPLETED</span>
+                     {/*tasks.complete*/}
+				</div>
+				</div>
+				</div>
+            </div>
+    )
+}
+
+}
+
+export default TaskManager;
+
+
+/**
+ * <div className=" container-fluid container-drag">
 			 <div className="row list">
 					<h2 className="header"></h2>
 					<div className="col-xs-6">
@@ -84,21 +121,4 @@ render(){
 				</div>
 				</div>
             </div>
-
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-export default TaskManager;
+ */

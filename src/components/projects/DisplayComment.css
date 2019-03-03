@@ -25,7 +25,7 @@ ul {
 * Lista de Comentarios
 =======================*/
 .comments-container {
-   margin: 40px auto 15px;
+   margin: 10px auto 15px;
    width: 768px;
 }
 
@@ -266,11 +266,6 @@ ul {
    .reply-list .comment-box {
        width: 340px;
    }
-
-   /**#wordBreak{
-    width:80px; 
-    word-Wrap:break-word;
-   }**/
 
    #wordBreak{
       position: absolute;

@@ -37,7 +37,8 @@ export const signIn = (credentials) => {
             return firestore.collection('users').doc(response.user.uid).set({
                 firstName: user.firstName,
                 lastName: user.lastName,
-                initials: user.firstName[0] + user.lastName[0]
+                initials: user.firstName[0] + user.lastName[0],
+                photoURL: 'https://img.icons8.com/office/48/000000/administrator-male.png'
             });
         }).then(() =>{
             dispatch({type: 'SIGN_UP_SUCCESS'})

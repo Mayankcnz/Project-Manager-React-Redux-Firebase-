@@ -15,7 +15,8 @@ super(props, context);
 
 this.state = {
   email: "",
-  password: ""
+  password: "",
+  fireLogo: false
 };
 }
 
@@ -30,11 +31,30 @@ else return 'error';
 
 handleSubmit = (event) => {
 event.preventDefault();
+this.fireLogo();
+delete this.state.fireLogo;
 this.props.signIn(this.state);
+}
+
+fireLogo = () =>{
+  this.setState({fireLogo: true})
+}
+
+renderfireLogo = () =>{
+
+  return (
+    <div class="circles">
+  <div></div>
+  <div></div>
+  <div></div>
+  <span></span>
+</div>
+  )
 }
 
 handleChange =  (event) => {
   this.setState({
+  fireLogo: false,
   [event.target.id]: event.target.value
 });
 }
@@ -42,10 +62,15 @@ render() {
 
   const { authError, auth } = this.props;
 
-  if(auth.uid) return <Redirect to='/' />
+
+  if(auth.uid) {
+    this.setState({fireLogo: false})
+    return <Redirect to='/' />
+  }
   
 return (
   <div className="Login container">  
+  {this.state.fireLogo ? this.renderfireLogo(): null}
   <form onSubmit={this.handleSubmit} >
   <CustomFormGroup id={"email"} type={"email"} callValidationState={this.getValidationState} instructions={"Enter Email"}  handleChange={this.handleChange} />
   <CustomFormGroup id={"password"} type={"password"} callValidationState={this.getValidationState} instructions={"Enter Password"}  handleChange={this.handleChange} />
@@ -62,7 +87,7 @@ return (
 
   <div style={{textAlign:"center", marginTop: "2%"}}><h4>or</h4></div>
 
-<ExternalLogin />
+<ExternalLogin fireLogo={this.fireLogo}/>
 
 </form>
 </div>  
@@ -72,7 +97,6 @@ return (
 
 const mapStateToProps = (state) =>{
 
-  console.log(state, "omg");
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth

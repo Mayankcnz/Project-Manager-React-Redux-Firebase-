@@ -14,8 +14,6 @@ export const createProject = (project) =>{
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
-        console.log(profile,"working for this one");
-
         firestore.collection('projects').add({
             ...project,
             authorFirstName: profile.firstName,
@@ -32,14 +30,13 @@ export const createProject = (project) =>{
     }
 };
 
-export const createReply = (reply, id) =>{
+export const createReply = (reply, id, repliedTo) =>{
 
     return(dispatch, getState, {getFirestore}) =>{
 
 
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
-        console.log(profile, "profile");
         const auth = getState().firebase.auth;
 
         let replyObject = null;
@@ -49,14 +46,16 @@ export const createReply = (reply, id) =>{
                 comment: reply, 
                 replyID: id,
                 Username: auth.displayName,
-                photoURL: auth.photoURL
+                photoURL: auth.photoURL,
+                repliedTO: repliedTo
             }
         }else {
             replyObject = {
                 comment: reply, 
                 replyID: id,
                 Username: profile.firstName +" "+profile.lastName,
-                photoURL: "https://img.icons8.com/office/48/000000/administrator-male.png"
+                photoURL: "https://img.icons8.com/office/48/000000/administrator-male.png",
+                repliedTO: repliedTo
             }
         }
         firestore.collection('replies').add({
@@ -153,41 +152,16 @@ export const deleteReplies = (parentCommentID)=>{
 }
 
 
-    export const deleteComment = (commentID)=>{
+    export const deleteComment = (collection, commentID)=>{
 
         return(dispatch, getState, {getFirestore}) =>{
     
             const firestore = getFirestore();
 
-            firestore.collection('comments').doc(commentID)
+            firestore.collection(collection).doc(commentID)
             .delete()
-           // .then(() =>{
-             //   dispatch({type: 'DELETE_PROJECT', comment});
-    
-           // }).catch((err) =>{
-           //     dispatch({type: 'DELETE_PROJECT_ERROR', err});
-           // })
         }
     }
-    
-    
-          //  var reply_Query= firestore.collection('replies').where('replyID','==','RBDsSlEc5JFVGmrsjxfN');
-           // reply_Query.get().then(function(querySnapshot) {
-           // querySnapshot.forEach(function(doc) {
-           // doc.ref.delete();
-
-
-       // firestore.collection('replies').listDocuments.then(replies =>{
-            //replies.map((reply) =>{
-                ///if(reply.replyID == 'xfAHDN3szwmFAN5xIHqk'){
-                ///    batch.delete(reply);
-               /// }
-            //})
-
-          //  batch.commit();
-        //})
-
-  //  }
 
 
 export const deleteProject = (project) =>{

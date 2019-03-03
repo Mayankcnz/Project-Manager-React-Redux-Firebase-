@@ -4,6 +4,24 @@
 	padding: 0;
 }
 
+.addTask > h6 {
+	float: left;
+	padding-left: 6px;
+	font-size: 15px;
+    font-weight: 500;
+	color: rgb(58, 22, 219);
+	-webkit-transition: padding-left .3s ease-out;
+  	-moz-transition: padding-left .3s ease-out;
+ 	 -o-transition: padding-left .3s ease-out;
+ 	 transition: padding-left .3s ease-out;
+
+}
+
+.addTask > h6:hover {
+
+	padding-left: 30px;
+}
+
 
 #heading {
 	background: #2980b9;

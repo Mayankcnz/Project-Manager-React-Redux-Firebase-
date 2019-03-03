@@ -8,7 +8,6 @@ class  RepliesList extends Component{
     render(){
     const { replies, commentID } = this.props;
 
-    console.log(replies, "OMG");
 
 
 
@@ -19,7 +18,7 @@ class  RepliesList extends Component{
                 {replies && replies.map(reply => {
 
             return(
-                   <Reply reply={reply}/>
+                   <Reply reply={reply} addReply={this.props.addReply} deleteReply={this.props.deleteReply} />
             );
                 })}
 

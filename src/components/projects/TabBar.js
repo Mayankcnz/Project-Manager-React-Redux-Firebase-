@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import {Tab, Tabs} from 'react-bootstrap';
 import List from './List';
 import Location from './Location';
-import TaskManager from '../TaskManager/TaskManager'
+import TaskList from '../TaskManager/TaskList'
 
 class TabBar extends React.Component{
 
 
     render(){
-
-
-
-        
 
         return(
             
@@ -23,7 +19,7 @@ class TabBar extends React.Component{
     <Location project = {this.props.project}/>
   </Tab>
   <Tab eventKey={3} title="Task Manager">
-     <TaskManager />
+     <TaskList />
     </Tab>
     <Tab eventKey={4} title="Pictures">
     Coming soon

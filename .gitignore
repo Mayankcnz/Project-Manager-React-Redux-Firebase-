@@ -3,6 +3,7 @@
 /dist 
 /.idea
 /yarn.lock
+/config/fbConfig
 
 /functions/node_modules
 # dependencies

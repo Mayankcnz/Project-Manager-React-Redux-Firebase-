@@ -22,7 +22,7 @@ class DisplayComment extends Component {
 		this.state={
 			editMode: false,
 			isReplying: false,
-			reply: '',
+			reply: '@'+this.props.comment.Username+': ',
 			comment: ''
 		}
 	
@@ -40,7 +40,7 @@ class DisplayComment extends Component {
 	renderCommentEdit = () =>{
 		return(
 			 <form className="post-edit" onSubmit={this.editCommentHandler}>
-       <textarea ref="editText" required>{this.props.comment.comment}</textarea>
+       <textarea autoFocus={true} ref="editText" required>{this.props.comment.comment}</textarea>
        <button id="submit" type="submit" className="button button-outline comment-button action-button expand-right">Done</button>
      </form>
 		)
@@ -66,7 +66,7 @@ class DisplayComment extends Component {
 
 		return(
 			<div className="post-edit">
-       <textarea onChange={this.handleChange} id="reply" value={this.state.reply} placeholder="Add a Reply here" style={{resize:"vertical"}}></textarea>
+       <textarea autoFocus={true} onChange={this.handleChange} id="reply" value={this.state.reply} placeholder="Add a Reply here" style={{resize:"vertical"}}></textarea>
 	   <button onClick={this.editReplyMode} id="cancel" type="submit" value="Cancel" className="btn btn-sm btn-primary">Cancel</button>{' '}
        <button onClick={this.editReplyMode} id="submit" type="submit" className="btn btn-sm btn-primary">Done</button>
      </div>
@@ -88,7 +88,9 @@ class DisplayComment extends Component {
 		const{id} = e.target;
 
 		if(id === "submit"){
-			this.props.addReply(this.state.reply, this.props.comment.id);
+
+			let stripped = this.state.reply.substring(this.state.reply.indexOf(":")+1, this.state.reply.length);
+			this.props.addReply(stripped, this.props.comment.id, this.props.comment.id);
 		}
 		this.setState({	isReplying : false})
 		
@@ -97,7 +99,7 @@ class DisplayComment extends Component {
 	handleDeleteComment = () =>{
 
 	//	console.log(this.props.comment.id);
-		this.props.deleteComment(this.props.comment.id);
+		this.props.deleteComment("comments",this.props.comment.id);
 		this.props.deleteReply(this.props.comment.id);
 	}
 
@@ -105,13 +107,12 @@ class DisplayComment extends Component {
 render(){
 
 	const {auth} = this.props;
-	console.log(auth, "Auth");
+	
 
-
-	//console.log(replies, "Replies");
-	//console.log(this.props.comment.id, "LOLZ");
 	const {replies, comment} = this.props;
 	const filteredReplies = replies && replies.filter(reply => reply.replyID== this.props.comment.id);
+
+	console.log(filteredReplies," filtered means");
 
 	let display = false;
 
@@ -144,7 +145,7 @@ render(){
 			</li>
 		</ul>
 		<ul>
-		{ <RepliesList replies={filteredReplies} commentID={this.props.comment.id}/> }
+		{ <RepliesList replies={filteredReplies} commentID={this.props.comment.id} deleteReply={(collection, id)=>{this.props.deleteComment(collection, id)}} addReply={(comment, id, repliedTo)=>{this.props.addReply(comment, id, repliedTo)}} /> }
 		</ul>
 	</div>
 
@@ -167,9 +168,9 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
 
 	return {
-		addReply: (reply, id) => dispatch(createReply(reply, id)),
+		addReply: (reply, id, repliedTo) => dispatch(createReply(reply, id, repliedTo)),
 		deleteReply: (parentCommentID) => dispatch(deleteReplies(parentCommentID)),
-		deleteComment: (commentID) => dispatch(deleteComment(commentID))
+		deleteComment: (collection, commentID) => dispatch(deleteComment(collection,commentID))
 	}
 }
 

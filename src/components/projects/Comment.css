@@ -1,5 +1,5 @@
 
-.callout.secondary {
+/**.callout.secondary {
    
     background: rgb(172, 182, 201);
     color: rgb(22, 84, 143);
@@ -26,6 +26,71 @@
 
     }
 
-  }
+  }**/
 
+  
+  .comment-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto;
+    overflow: hidden;
+    font-family: serif;
+  }
+  .comment-container .meta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .comment-container .meta .avatar {
+    border-radius: 50%;
+    width: 40px;
+  }
+  .comment-container .meta .name {
+    margin-left: 5px;
+    transform: translateY(-100px);
+    display: inline-block;
+    color: #2d69eb;
+    transition: all 0.3s;
+  }
+  .comment-container .placeholder {
+    margin-top:-15px;
+    position: absolute;
+    top: 50%;
+    font-size: 18px;
+    color: #999999;
+    left: 60px;
+  }
+  .comment-container textarea {
+    text-indent:20px;
+    background-color: white;
+    height: 70px;
+    transition: all 0.3s;
+    font-size: 18px;
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+  .comment-container .btns {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+  .comment-container.toggled .meta .name {
+    transform: translateY(0);
+  }
+  .comment-container.toggled textarea {
+    height: 200px;
+    color: #444;
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  .comment-container.toggled .placeholder {
+    display: none;
+  }
+  .comment-container.toggled .btns {
+    opacity: 1;
+    visibility: visible;
+  }
   
