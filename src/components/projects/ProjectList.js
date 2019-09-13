@@ -23,7 +23,7 @@ class ProjectList extends Component {
             <div className="project-list section">
                 {projects && projects.map(project => {
                     return (
-                        <ProjectSummary project={project}
+                        <ProjectSummary key={project.id} project={project}
                             isOpen={this.state.collapse === project}
                             toggle={this.toggle}
                         />

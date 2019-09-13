@@ -80,12 +80,8 @@ class CreateProject extends Component {
 
   handleChange = (e) => {
 
-    console.log(this.state);
-
-
     const {formErrors, projectFormErrors, form, projectForm, authentication} = this.state;
     authentication.save = 'false';
-    //authentication.checked = '';
     const {id, value} = e.target
 
     switch(id){

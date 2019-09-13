@@ -6,10 +6,12 @@ import {combineReducers} from 'redux' /// combines reducers
 import {firestoreReducer} from 'redux-firestore';
 import {firebaseReducer} from 'react-redux-firebase';
 import addressReducer from './addressReducer';
+import taskReducer from './taskReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer, // authReducer will update information on the auth property inside the state object
     address: addressReducer,
+    taskList: taskReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer,
     project: projectReducer,

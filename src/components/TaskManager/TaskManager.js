@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './TaskManager.css'
 import './Draggable.css'
+import {connect} from 'react-redux';
+
 
 
 class TaskManager extends Component {
-
 
 	state = {
         tasks: [
@@ -15,7 +16,6 @@ class TaskManager extends Component {
 	}
 	
 	onDragStart = (ev, id) => {
-        console.log('dragstart:',id);
         ev.dataTransfer.setData("id", id);
     }
 
@@ -43,8 +43,6 @@ class TaskManager extends Component {
 		e.preventDefault();
 	 }
  
-
-
 render(){
 
 	var tasks = {
@@ -62,41 +60,48 @@ render(){
 			><span><i class="fa fa-trash"></i></span>
 				{t.name}
 			</div>
+			
 		);
+
+
 	});
+
+	const {taskList} = this.props; 
 
     return (
 
-		<div className=" container-fluid container-drag">
-			 <div className="row list">
-					<h2 className="header">{"Testing"}</h2>
-					<div className="col-xs-6">
-                <div className="wip"
-                    onDragOver={(e)=>this.onDragOver(e)}
-                    onDrop={(e)=>{this.onDrop(e, "wip")}}>
-                    <span className="task-header">{this.props.taskListName}</span>
-					<div className="addTask" onClick={this.handleClick}>
-               			 <h6>+Add a Task</h6>
-           			 </div>
-                    {/*tasks.wip*/}
-                </div>
-				</div>
-				<div className="col-xs-6">
-				<div className="droppable"
-                    onDragOver={(e)=>this.onDragOver(e)}
-                    onDrop={(e)=>this.onDrop(e, "complete")}>
-                     <span className="task-header">COMPLETED</span>
-                     {/*tasks.complete*/}
-				</div>
-				</div>
-				</div>
-            </div>
+		<div>
+
+		</div>
     )
 }
 
 }
 
-export default TaskManager;
+const mapStateToProps = (state) =>{
+
+	return {
+		tasks: state.taskList
+	}
+}
+
+
+export default connect(mapStateToProps)(TaskManager);
+
+/**
+ * <div className=" container-fluid container-drag">
+			c
+					<div className="col-xs-6">
+					<div className="droppable"
+						onDragOver={(e)=>this.onDragOver(e)}
+						onDrop={(e)=>this.onDrop(e, "complete")}>
+						 <span className="task-header">COMPLETED</span>
+						 {/*tasks.complete}
+					</div>
+					</div>
+					</div>
+				</div>
+ */
 
 
 /**

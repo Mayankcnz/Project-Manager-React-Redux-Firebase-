@@ -22,11 +22,13 @@ class Dashboard extends Component {
         return <Redirect to='/create' />
     }
 
-
-    
 render(){
 
-    const {projects, auth, notifications} = this.props;
+    const {projects, auth, notifications, tasks} = this.props;
+
+
+    console.log("MY AUTH"+auth.uid);
+    console.log(projects, "all projects");
 
     console.log(notifications, "Notifications");
 
@@ -58,10 +60,9 @@ const mapStateToProps = (state) =>{ // accessing state of the store , can grab s
     sideBarOpen: state.sidebar.sideBarOpen, // add sideBarOpen property to props of this component. so we can access it insoide this component
     projects: state.firestore.ordered.projects,
     auth: state.firebase.auth,
-    address: state.address.address,
+    address: state.address.address
 } // store knows which reducer will handle the dispatch action
 }
-
 
 export default compose(
     connect(mapStateToProps),
@@ -70,3 +71,12 @@ export default compose(
       { collection: 'notifications', limit: 3, orderBy: ['time', 'desc']}
     ])
   )(Dashboard)
+
+
+  /**
+   *  { collection: 'projects',
+       doc: 'tFLcawA0NnuAxpXMZ5BH',
+        subcollections: [
+            {collection: 'tasks'}
+        ]}
+   */

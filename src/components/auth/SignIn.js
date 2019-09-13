@@ -64,7 +64,6 @@ render() {
 
 
   if(auth.uid) {
-    this.setState({fireLogo: false})
     return <Redirect to='/' />
   }
   

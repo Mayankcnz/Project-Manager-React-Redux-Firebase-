@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import './TaskList.css'
-import TaskManager from './TaskManager'
+import firebase from "firebase";
+import {connect} from 'react-redux';
+import {getAllTasks} from '../../store/actions/taskActions';
+import RenderTaskList from './RenderTaskList';
+
 
 
 
@@ -8,64 +11,42 @@ class TaskList extends Component {
 
 
     state = {
+        tasks: '',
         clicked: false,
         taskListName: '',
         submit: false
     }
 
-
-    handleClick = (e) =>{
-        e.preventDefault();
-
-        this.setState({clicked: true})
-    }
-
-    renderDefault(){
-        return (
-            <div onClick={this.handleClick} className="box">
-                <h6>+Add a Task List</h6>
-            </div>
-        )
-    }
-
-    handleChange = (e) =>{
-        this.setState({taskListName : e.target.value});
-
-        console.log(this.state.taskListName);
-    }
-
-    renderOnClick = () =>{
-        return (
-            <div className="boxClicked">
-            <input id={"taskListName"} placeholder= "Name of the Task List" className="text-center" type="text" autoFocus={true} value={this.state.taskListName} onChange={this.handleChange} /> 
-                <button  onClick={() =>{this.handleButtonEvent("Submit")}} id="AddTaskList"><p>Add Task List</p></button>
-                <button  onClick={() =>{this.handleButtonEvent("Cancel")}} id="Cancel" type="submit"><p>Cancel</p></button>
-            </div>
-        )
-
-    }
-
-    handleButtonEvent = (action) =>{
-
-
-        this.setState({clicked: false})
-
-        if(action === "Submit"){
-            this.setState({submit: true});
-        }
+    /**
+     * get all the tasks
+     */
+    componentWillMount(){
+        this.props.getTasks();
     }
 
     render(){
-
+        
         return (
-
-            <div>
-                {this.state.submit ? <TaskManager taskListName={this.state.taskListName}/> : null}
-                {this.state.clicked ? this.renderOnClick() : this.renderDefault()}
+            <div className="container-fluid">
+                <RenderTaskList projectID = {this.props.projectID} newList= {false} taskList={this.props.taskList}/>
             </div>
 
         )
     }
 }
 
-export default TaskList;
+const mapDispatchToProps = (dispatch) =>{
+
+    return {
+        getTasks: () => dispatch(getAllTasks())
+    }
+}
+
+const mapStateToProps = (state) =>{
+    return {
+        taskList: state.taskList
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

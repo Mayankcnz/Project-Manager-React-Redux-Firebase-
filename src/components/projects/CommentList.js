@@ -3,12 +3,10 @@ import DisplayComment from './DisplayComment';
 
 
 const CommentList = (props) =>{
-    const { comments, replies } = props;
+    const { comments, replies, auth } = props;
 
     console.log(replies,"alll");
 
-
-   //console.log(filter, "FLITER IN THE FUCXK");
 
 
    // console.log(props.replies, "REGATHERING");
@@ -17,9 +15,8 @@ const CommentList = (props) =>{
             <div className="container-fluid">
                 {comments && comments.map(comment => {
 
-                
                     return (
-                        <DisplayComment key={comment.id} comment={comment} replies={replies}
+                        <DisplayComment  key={comment.id} auth={auth} comment={comment} replies={replies}
                         />
                     );
                 })}

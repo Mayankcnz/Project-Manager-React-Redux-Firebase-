@@ -19,7 +19,7 @@ class TabBar extends React.Component{
     <Location project = {this.props.project}/>
   </Tab>
   <Tab eventKey={3} title="Task Manager">
-     <TaskList />
+     <TaskList projectID={this.props.id} />
     </Tab>
     <Tab eventKey={4} title="Pictures">
     Coming soon

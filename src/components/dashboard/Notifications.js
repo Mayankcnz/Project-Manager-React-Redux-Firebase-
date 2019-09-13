@@ -24,8 +24,6 @@ const Notifications = (props) => {
   }else if(notification.content.includes("Delete")){
     icon = 'icon fas fa-eraser'
   }
-
-  console.log(notification.id,"ID");
 return <div key ={notification.id} className="notification">
       <div className="alert">
       <i className={icon}></i>

@@ -41,9 +41,7 @@ notificationHandler = (id) =>{
 }
 
 render() {
-
- 
-
+  
   const {sideBarOpen} = this.props;
   let backDrop;
 

@@ -98,7 +98,12 @@ class DisplayComment extends Component {
 
 	handleDeleteComment = () =>{
 
-	//	console.log(this.props.comment.id);
+		if(this.props.comment.userId != this.props.auth.uid){
+			console.log("shall return");
+			return;
+		}
+		console.log("commend uid", this.props.comment.userId);
+		console.log("auth id",this.props.auth.uid);
 		this.props.deleteComment("comments",this.props.comment.id);
 		this.props.deleteReply(this.props.comment.id);
 	}
@@ -107,9 +112,9 @@ class DisplayComment extends Component {
 render(){
 
 	const {auth} = this.props;
-	
 
 	const {replies, comment} = this.props;
+	console.log(this.props.comment, "my god");
 	const filteredReplies = replies && replies.filter(reply => reply.replyID== this.props.comment.id);
 
 	console.log(filteredReplies," filtered means");

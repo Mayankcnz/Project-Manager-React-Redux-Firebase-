@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-// Replace this with your own config details
 var config = {
     apiKey: "AIzaSyC1ed_8aUoxR_qmKxncz65NnZY8yvU-NRU",
     authDomain: "project-manager-eee25.firebaseapp.com",

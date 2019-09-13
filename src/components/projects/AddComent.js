@@ -67,7 +67,7 @@ class AddComment extends Component {
         e.stopPropagation();
 
         this.setState({
-            toggleCommentBox: !this.state.toggleCommentBox
+            toggleCommentBox: true
           })
     }
 
@@ -93,7 +93,7 @@ class AddComment extends Component {
      <button id="submit" type="submit" className="btn btn-sm btn-primary">Add Comment</button>
   </div>
 </form>
-<CommentList replies={this.props.replies} comments={this.props.comments}/>
+<CommentList auth={this.props.auth} replies={this.props.replies} comments={this.props.comments}/>
 </div>
 
 

@@ -14,6 +14,9 @@ export const createProject = (project) =>{
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
+        console.log(project, "PROJECT");
+        console.log(profile.firstName, profile.lastName, "name");
+
         firestore.collection('projects').add({
             ...project,
             authorFirstName: profile.firstName,
@@ -92,7 +95,6 @@ export const updateProject = (project, id) =>{ // adding user in because iwe wan
         })
 
     } 
-
 }
 
 export const createComment = (comment, projectID) =>{
@@ -109,6 +111,7 @@ export const createComment = (comment, projectID) =>{
                 comment: comment, 
                 projectId: projectID,
                 Username: auth.displayName,
+                userId: auth.uid,
                 photoURL: auth.photoURL
             }
         }else {
@@ -119,7 +122,11 @@ export const createComment = (comment, projectID) =>{
                 photoURL: "https://img.icons8.com/office/48/000000/administrator-male.png"
             }
         }
-        firestore.collection('comments').add({
+
+
+      // console.log(result, "result fetch successfull");
+       
+       firestore.collection('comments').add({
             
             ...commentObject,
             createdAt: new Date()
@@ -150,7 +157,6 @@ export const deleteReplies = (parentCommentID)=>{
     });
 }
 }
-
 
     export const deleteComment = (collection, commentID)=>{
 
