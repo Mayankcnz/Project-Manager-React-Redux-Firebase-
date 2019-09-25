@@ -43,15 +43,6 @@ constructor(){
 
         const {task} = this.state;
 
-        /** task.push( <div key={this.state.taskName} 
-            onDragStart = {(e) => this.onDragStart(e, this.state.taskName)}
-            draggable
-            id="draggable"
-            style = {{backgroundColor: "yellow"}}>
-            
-        <span><i class="fa fa-trash"></i></span>
-            {this.state.taskName}
-        </div>)**/
         if(this.state.addTaskMode){
             this.setState(({
                 task,

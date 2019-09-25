@@ -32,8 +32,6 @@ backdropClickHandler = () =>{ // handling backdrop separately to sidebar as many
 };
 
 notificationHandler = (id) =>{
-  console.log(id);
-  console.log("coming");
    <Redirect to="/create" />
   //this.setState({
   //  notificationHandler: projectId
