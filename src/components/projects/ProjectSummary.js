@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
-import TogglerButton from '../SideBar/TogglerButton';
 import {Collapse, Well, Label} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {deleteProject} from '../../store/actions/projectActions';
@@ -50,7 +49,7 @@ class ProjectSummary extends React.Component{
             <Link to={'project/'+project.id} className="btn btn-primary" style={{marginRight:"20px"}} >continue</Link>
             <div onClick={this.handleDelete} class="reveal btn btn-primary" style={{position: "absolute" , right: "0"}}>delete</div>
             <div style={{position: "absolute" , top: "0", right:"0"}}>status: <Label bsStyle={this.getAppropriateLabel()} >Ongoing</Label></div>
-            <h5 style={{display:"inline"}}>More Info: </h5> <TogglerButton onclick={this.toggle}/>
+            <h5 style={{display:"inline"}}>More Info: </h5>
             <Collapse in={this.props.isOpen} >
                 <div style={{marginTop:"20px"}}>
                     <Well>

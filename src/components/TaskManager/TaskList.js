@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import firebase from "firebase";
 import {connect} from 'react-redux';
 import {getAllTasks} from '../../store/actions/taskActions';
 import RenderTaskList from './RenderTaskList';

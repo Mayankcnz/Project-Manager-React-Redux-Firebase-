@@ -5,8 +5,11 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PopUp from '../projects/PopUp';
 
-const APP_ID_HERE = 'CB0vBpcjA4YGTGkOVDCL';
-const APP_CODE_HERE = 'SiozGELkgIyOR8S6QUUDMA';
+
+
+
+const APP_ID_HERE = process.env.REACT_APP_APP_ID;
+const APP_CODE_HERE = process.env.REACT_APP_APP_CODE;
 
 class AddressForm extends Component {
   constructor(props) {
@@ -27,9 +30,7 @@ class AddressForm extends Component {
   handleSave = () =>{
     this.onCheck();
     if(this.checkaddress()){
-      console.log(" MAN DUCK THIS");
       this.props.errorInformation(""); // pass empty string indicating form error is empty
-      console.log("addres is alg");
     }else {
       this.props.errorInformation("Address fields is invalid or incomplete!");
     }

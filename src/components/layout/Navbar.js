@@ -2,7 +2,6 @@
 import React from 'react'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
-import TogglerButton from '../SideBar/TogglerButton'
 import {Navbar, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
@@ -20,7 +19,7 @@ const Header = (props) =>{
     <Navbar inverse collapseOnSelect fixedTop={false} fluid={true}>
 <Navbar.Header >
   <Navbar.Brand>
-    <a pullLeft href="#brand"><TogglerButton onclick={props.togglerClickHandler} />   Project Manager</a>
+    
   </Navbar.Brand>
   <Navbar.Toggle />
 </Navbar.Header>
@@ -32,7 +31,6 @@ const Header = (props) =>{
 }
 
 const mapStateToProps = (state) =>{
-  console.log(state, "AHAHAH");
   return {
       auth: state.firebase.auth
   }

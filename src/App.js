@@ -3,8 +3,6 @@ import { BrowserRouter, Switch, Route, Redirect, NavLink , withRouter} from 'rea
 import Header from './components/layout/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
 import ProjectDetails from './components/projects/ProjectDetails';
-import Sidebar from './components/SideBar/SideBar';
-import BackDrop from './components/BackDrop/BackDrop';
 import { connect } from 'react-redux';  // allows us to connect this component to the redux store by installing a higher order component which in this case
 // is a function, which we invoke , which then returns a higher order component (which allows us to connect to the redux store)
 import SignIn from './components/auth/SignIn';
@@ -13,6 +11,7 @@ import CreateProject from './components/projects/CreateProject';
 import AddressForm from './components/form/AddressForm';
 import PopUp from './components/projects/PopUp';
 import { createProject } from './store/actions/projectActions';
+
 
 class App extends Component {
 
@@ -40,20 +39,12 @@ notificationHandler = (id) =>{
 
 render() {
   
-  const {sideBarOpen} = this.props;
-  let backDrop;
-
-  if(sideBarOpen){
-    backDrop = <BackDrop click={this.backdropClickHandler}/>;
-  }
 
   // we can use routing here on the front end to control the route of the different components and pages to show several different pages to the user
   return (
     <BrowserRouter> 
     <div className="App" style={{height: "100%"}}>
       <Header togglerClickHandler={this.sidebarToggleClickHandler}/>
-      <Sidebar show={this.props.sideBarOpen}/>
-      {backDrop}
       <Switch>
         <Route exact path="/"  component={()=> <Dashboard handler={this.notificationHandler} />} />
         <Route path="/project/:id" component={ ProjectDetails } />
@@ -64,13 +55,6 @@ render() {
     </div>
     </BrowserRouter>
   );
-}
-}
-
-const mapStateToProps = (state) =>{ // accessing state of the store , can grab stuff from the state and attach it to props
-return {
-  sideBarOpen: state.sidebar.sideBarOpen // add sideBarOpen property to props
-
 }
 }
 
@@ -96,6 +80,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App); 
+export default connect(null, mapDispatchToProps)(App); 
 // invoking the connect function and passing                                  
 // mapstatetoprops, which returns a higher order component which wrappers our component by enbaling the ability to connect to the redux stores
