@@ -1,5 +1,6 @@
 
 View Demo: https://project-manager-eee25.firebaseapp.com/signin
+A fully responsive web app that lets you manage your projects and track information. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
